@@ -1,0 +1,7 @@
+Requirements for the model to work:
+The model's .dll file needs to either be copied to the 'MODELS' folder of your Proteus installation, or it needs to be in the same folder as the schematic file which is using it.
+
+To add this model to your Proteus devices library:
+ - Open the demo schematic (.dsn file)
+ - Right-click on the model and choose the 'Make Device' command
+ - Click 'Next' until you get to the last page of the wizard, and then click 'OK'
