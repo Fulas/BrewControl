@@ -2,9 +2,8 @@
 #include <LiquidCrystal_I2C.h>
 #include <EmonLib.h>  // Include Emon Library
 EnergyMonitor emon1;  // Create an instance
-#define Tinput A0
-float Tvoltage;
-float Temp;
+#define TempWaterVoltInput A1  //Temp Watter
+#define TempOilVoltInput A2  //Temp Oil
 //lcd is a 20 chars and 4 line display
 LiquidCrystal_I2C lcd(0x20, 20, 4);
 //set the lcd address to 0x27 for real
@@ -15,7 +14,8 @@ void setup()
   Wire.begin();
   lcd.init();
   lcd.backlight();
-  pinMode(Tinput, INPUT);
+  pinMode(TempWaterVoltInput, INPUT);
+  pinMode(TempOilVoltInput, INPUT);
   emon1.current(1, 111.1); // Current: input pin, calibration.
 }
 
@@ -24,21 +24,42 @@ void loop()
   lcd.setCursor(0, 0);
   double Irms = emon1.calcIrms(1480);  // Calculate Irms only
   delay(500);
-  Tvoltage = analogRead(Tinput);
-  /*if (Tvoltage < 410) {
-    lcd.clear();
-    lcd.print("Error");
-  }*/
-  //if (Tvoltage > 409) {
-    Tvoltage = map(Tvoltage, 410, 1023, 0, 614);
-    Temp = (150 * Tvoltage) / 614;
-    lcd.clear();
-    lcd.print(Temp, 2);
-  //}
+  temp();
   //lcd.print(Irms * 230.0); // Apparent power
   //lcd.println(Irms);  // Irms
 }
-//250ohm
-//U=R*I        
-//8mA-->0-->2V-->409            
-//20mA-->150-->5V-->1023
+
+void temp()
+{
+  float TemWaterVolt;
+  float TempOilVolt;
+  float TempWater;
+  float TempOil;
+  TemWaterVolt = analogRead(TempWaterVoltInput);
+  TempOilVolt = analogRead(TempOilVoltInput);
+  //Temp Water
+  //T=50*V-100
+  //0C-->2V-->409
+  //150C-->5V-->1023
+  lcd.setCursor(0, 0);
+  if (TemWaterVolt < 410) {
+    lcd.print("Error");
+  }
+  if (TemWaterVolt > 409) {
+    TempWater = map(TemWaterVolt, 410, 1023, 0, 150);
+    lcd.print(TempWater, 2);
+  }
+  //Temp Oil
+  //T=100*V-100
+  //0C-->1V-->204
+  //400C-->5V-->1023
+  lcd.setCursor(7, 0);
+  if (TempOilVolt < 205) {
+    lcd.print("Error");
+  }
+  if (TempOilVolt > 204) {
+    TempOil = map(TempOilVolt, 205, 1023, 0, 400);
+    lcd.print(TempOil, 2);
+  }
+}
+
