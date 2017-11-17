@@ -2,13 +2,13 @@ void Temp()//PRINT:Temp Watter Temp Oil
 {
   float TempWater=0;
   float TempOil=0;
-  for (int i=0; i <= 10; i++)
+  for (int i=0; i <= 1000; i++)
   {
     TempWater = TempWater+analogRead(TempWaterInput);
     TempOil = TempOil+analogRead(TempOilInput);
   }
-  TempWater = TempWater/10;
-  TempOil = TempOil/10;
+  TempWater = TempWater/1000;
+  TempOil = TempOil/1000;
   
   //Temp Water
   //250ohm
