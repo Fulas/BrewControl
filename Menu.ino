@@ -3,7 +3,7 @@ int NUM_KEYS = 5;
 int adc_key_in;
 int key = -1;
 int oldkey = -1;
-String option="water";
+String option = "water";
 
 void Menu()//PRINT: tempWaterSetpoint tempOilSetpoint
 {
@@ -18,27 +18,27 @@ void Menu()//PRINT: tempWaterSetpoint tempOilSetpoint
       switch (key)
       {
         case 0: //Left
-          if (option=="water")
+          if (option == "water")
             option = "oil";
-          else if (option=="oil")
+          else if (option == "oil")
             option = "water";
           break;
         case 1: //Down
-          if (option=="water")
+          if (option == "water")
             tempWaterSetpoint -= 0.5;
-          else if (option=="oil")
+          else if (option == "oil")
             tempOilSetpoint -= 0.5;
           break;
         case 2: //Up
-          if (option=="water")
+          if (option == "water")
             tempWaterSetpoint += 0.5;
-          else if (option=="oil")
+          else if (option == "oil")
             tempOilSetpoint += 0.5;
           break;
         case 3: //Right
-          if (option=="water")
+          if (option == "water")
             option = "oil";
-          else if (option=="oil")
+          else if (option == "oil")
             option = "water";
           break;
         case 4: Serial.println ("S5 OK"); //Ok

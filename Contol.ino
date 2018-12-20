@@ -7,13 +7,13 @@ void Control()//PRINT:Num (Auto 1-5) PowerOn (Res 1-5)
   {
     if (digitalRead(i) == true && PowerOn < ToPowerOn)
     {
-      if (2<=i<=3)
+      if (2 <= i <= 3)
       {
-        if (PowerOn+3 <= ToPowerOn)
+        if (PowerOn + 3 <= ToPowerOn)
         {
           digitalWrite(i + 5, HIGH);//Res1-Res5
-          PowerOn=PowerOn+3;
-          lcd.print(i-1);
+          PowerOn = PowerOn + 3;
+          lcd.print(i - 1);
         }
         else
           digitalWrite(i + 5, LOW);//Res1-Res5
@@ -22,7 +22,7 @@ void Control()//PRINT:Num (Auto 1-5) PowerOn (Res 1-5)
       {
         digitalWrite(i + 5, HIGH);//Res1-Res5
         PowerOn++;
-        lcd.print(i-1);
+        lcd.print(i - 1);
       }
     }
     else
@@ -37,9 +37,9 @@ int Auto()
   {
     if (digitalRead(i) == true)
     {
-      if(2<=i<=3)
+      if (2 <= i <= 3)
       {
-        Num=Num+2;
+        Num = Num + 2;
       }
       Num++;
     }

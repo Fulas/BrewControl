@@ -13,11 +13,11 @@ unsigned int counter;
 float tempWater;
 float tempOil;
 
-float tempWaterSetpoint=70;
-float tempOilSetpoint=100;
+float tempWaterSetpoint = 70;
+float tempOilSetpoint = 100;
 
 //lcd is a 20 chars and 4 line display
-LiquidCrystal_I2C lcd(0x27, 2, 1, 0, 4, 5, 6, 7, 3,POSITIVE);
+LiquidCrystal_I2C lcd(0x27, 2, 1, 0, 4, 5, 6, 7, 3, POSITIVE);
 
 void setup()
 {
@@ -43,11 +43,11 @@ void setup()
 
 void loop()
 {
-  sumWater += analogRead(TempWaterInput); 
-  sumOil += analogRead(TempWaterInput); 
+  sumWater += analogRead(TempWaterInput);
+  sumOil += analogRead(TempWaterInput);
   counter++;
 
-  if (millis()-start > 1000UL){  // 1000 milisegundos = 1seg
+  if (millis() - start > 1000UL) { // 1000 milisegundos = 1seg
     Temp();
     Control();
     sumWater = 0;

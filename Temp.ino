@@ -1,8 +1,8 @@
 void Temp()//PRINT: tempWatter tempOil
 {
-  tempWater=sumWater/counter;
-  tempOil=sumOil/counter;
-  
+  tempWater = sumWater / counter;
+  tempOil = sumOil / counter;
+
   //Temp Water
   //250ohm
   //U=R*I
@@ -17,7 +17,7 @@ void Temp()//PRINT: tempWatter tempOil
     tempWater = (150 * tempWater) / 614;
     lcd.print(tempWater, 2);
   }
-  
+
   //Temp Oil
   //250ohm
   //U=R*I
