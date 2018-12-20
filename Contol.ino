@@ -1,36 +1,8 @@
-void Control() //PRINT:Num (Auto 1-5) Output PowerOn (Res 1-5)
+void Control()//PRINT:Num (Auto 1-5) PowerOn (Res 1-5)
 {
   int PowerOn = 0, ToPowerOn = 0;
-  double Num;
-  double gap = abs(Setpoint - Input); //distance away from setpoint
-  Num = Auto();
-  if (Num == 0)
-  {
-    Output = 0;
-  }
-  else
-  {
-    myPID.SetOutputLimits(0, Num);
-    Input = analogRead(TempWaterInput);
-    if (gap < 10)
-    { //we're close to setpoint, use conservative tuning parameters
-      myPID.SetTunings(consKp, consKi, consKd);
-    }
-    else
-    {
-      //we're far from setpoint, use aggressive tuning parameters
-      myPID.SetTunings(aggKp, aggKi, aggKd);
-    }
+  int Num = Auto();
 
-    myPID.Compute();
-    lcd.setCursor(0, 2);
-    lcd.print(Num);
-    lcd.print(" ");
-    lcd.print(Output);
-    lcd.print(" ");
-
-    ToPowerOn = Output;
-  }
   for (int i = 2; i <= 6 ; i++) //Auto1-Auto5
   {
     if (digitalRead(i) == true && PowerOn < ToPowerOn)
