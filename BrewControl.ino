@@ -1,6 +1,5 @@
 #include <Wire.h>
 #include <LiquidCrystal_I2C.h>
-#include <PID_v1.h>
 
 #define Key A0  //Boton
 #define TempWaterInput A1  //Temp Watter
@@ -14,18 +13,6 @@ int oldkey = -1;
 
 //lcd is a 20 chars and 4 line display
 LiquidCrystal_I2C lcd(0x27, 2, 1, 0, 4, 5, 6, 7, 3,POSITIVE);
-//set the lcd address to 0x27 for real
-//set the lcd address to 0x20 for simulation
-
-//Define Variables we'll be connecting to
-double Setpoint = 682, Input, Output;
-
-//Define the aggressive and conservative Tuning Parameters
-double aggKp = 4, aggKi = 0.2, aggKd = 1;
-double consKp = 1, consKi = 0.05, consKd = 0.25;
-
-//Specify the links and initial tuning parameters
-PID myPID(&Input, &Output, &Setpoint, consKp, consKi, consKd, DIRECT);
 
 void setup()
 {
@@ -43,9 +30,6 @@ void setup()
   {
     pinMode(i, OUTPUT);
   }
-  Input = analogRead(TempWaterInput);
-  //turn the PID on
-  myPID.SetMode(AUTOMATIC);
 }
 
 void loop()
@@ -55,6 +39,4 @@ void loop()
   Temp();
   Menu();
   Control();
-  //delay(1000);
-  //lcd.clear();
 }
