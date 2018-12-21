@@ -3,6 +3,7 @@ int NUM_KEYS = 5;
 int adc_key_in;
 int key = -1;
 int oldkey = -1;
+
 String option = "water";
 
 void Menu()//PRINT: tempWaterSetpoint tempOilSetpoint
@@ -41,15 +42,23 @@ void Menu()//PRINT: tempWaterSetpoint tempOilSetpoint
           else if (option == "oil")
             option = "water";
           break;
-        case 4: Serial.println ("S5 OK"); //Ok
+        case 4: //Ok
+          if (pump == "MAN")
+            pump = "AUT";
+          else if (option == "AUT")
+            option = "MAN";
           break;
       }
     }
   }
   lcd.setCursor(0, 3);
-  lcd.print(tempWaterSetpoint, 1);
-  lcd.setCursor(7, 3);
-  lcd.print(tempOilSetpoint, 1);
+  lcd.print(tempWaterSetpoint, 2);
+  lcd.print("ºC ");
+  lcd.setCursor(10, 3);
+  lcd.print(tempOilSetpoint, 2);
+  lcd.print("ºC ");
+  lcd.setCursor(18, 4);
+  lcd.print(pump);
 }
 
 int get_key (unsigned int input)

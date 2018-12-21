@@ -4,6 +4,7 @@
 #define Key A0  //Boton
 #define TempWaterInput A1  //Temp Watter
 #define TempOilInput A2  //Temp Oil
+#define PumpOutput 12  //Pump
 
 unsigned long sumWater = 0;
 unsigned long sumOil = 0;
@@ -15,6 +16,8 @@ float tempOil;
 
 float tempWaterSetpoint = 70;
 float tempOilSetpoint = 100;
+
+String pump = "MAN";
 
 //lcd is a 20 chars and 4 line display
 LiquidCrystal_I2C lcd(0x27, 2, 1, 0, 4, 5, 6, 7, 3, POSITIVE);
@@ -35,10 +38,17 @@ void setup()
   {
     pinMode(i, OUTPUT);
   }
+  pinMode(PumpOutput, OUTPUT);//Pump
   start = millis();
   counter = 0;
   lcd.setCursor(0, 0);
-  lcd.print("AGUA  ACEITE");
+  lcd.print(" AGUA    ACEITE");
+           //1234567891234567891
+           //12.45ºC  100.12ºC
+           //68.50ºC  90.50ºC
+           //2 + + + + + BOM AUT
+   lcd.setCursor(14, 4);
+   lcd.print("BOM");
 }
 
 void loop()

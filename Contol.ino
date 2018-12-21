@@ -1,48 +1,44 @@
-void Control()//PRINT:Num (Auto 1-5) PowerOn (Res 1-5)
+void Control()//PRINT:PowerOn (0-5)
 {
-  int PowerOn = 0, ToPowerOn = 0;
-  int Num = Auto();
+  int toPowerOn = 0;
+  int powerOn = 0;
+  int hysteresis = 2;
+  int x = 1;
 
-  for (int i = 2; i <= 6 ; i++) //Auto1-Auto5
+  //OIL
+  for (int i = 1; i <= 5 ; i++)
   {
-    if (digitalRead(i) == true && PowerOn < ToPowerOn)
+    if (tempOil < tempOilSetpoint * x - hysteresis && tempOil >= tempOilSetpoint * (x - 0.05))
     {
-      if (2 <= i <= 3)
-      {
-        if (PowerOn + 3 <= ToPowerOn)
-        {
-          digitalWrite(i + 5, HIGH);//Res1-Res5
-          PowerOn = PowerOn + 3;
-          lcd.print(i - 1);
-        }
-        else
-          digitalWrite(i + 5, LOW);//Res1-Res5
-      }
-      else
-      {
-        digitalWrite(i + 5, HIGH);//Res1-Res5
-        PowerOn++;
-        lcd.print(i - 1);
-      }
+      toPowerOn = i;
+    }
+    x-=0.05;
+  }
+
+  lcd.setCursor(0, 4);
+  lcd.print(toPowerOn);
+  lcd.setCursor(3, 4);
+
+  for (int i = 2; i <= 6 ; i++)//Auto1-Auto5
+  {
+    if (digitalRead(i) == true && powerOn < toPowerOn)
+    {
+      digitalWrite(i + 5, HIGH);//Res ON
+      powerOn++;
+      lcd.print(i - 1);
+      lcd.print("+ ");
     }
     else
-      digitalWrite(i + 5, LOW);//Res1-Res5
-  }
-}
-
-int Auto()
-{
-  int Num = 0;
-  for (int i = 2; i <= 6; i++)//Auto1-Auto5
-  {
-    if (digitalRead(i) == true)
     {
-      if (2 <= i <= 3)
-      {
-        Num = Num + 2;
-      }
-      Num++;
+      digitalWrite(i + 5, LOW);//Res OFF
+      lcd.print("- ");
     }
   }
-  return Num;
+
+  //WATER
+  if (pump == "AUT" && tempWater < tempWaterSetpoint - hysteresis)
+    digitalWrite(PumpOutput, HIGH);//Pump ON
+  else if (pump == "MAN" || tempWater >= tempWaterSetpoint )
+    digitalWrite(PumpOutput, LOW);//Pump OFF
+  
 }
