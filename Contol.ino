@@ -1,18 +1,27 @@
 void Control()//PRINT:PowerOn (0-5)
 {
-  int toPowerOn = 0;
   int powerOn = 0;
   int hysteresis = 2;
-  float x = 1;
+  float x = 0.8;
 
   //OIL
-  for (int i = 1; i <= 5 ; i++)
+  //Rising
+  for (int i = 5; i >= 1; i--)
   {
-    if (tempOil < tempOilSetpoint * x - hysteresis && tempOil >= tempOilSetpoint * (x - 0.05))
+    if (toPowerOn == i && tempOil > tempOilSetpoint * x)
     {
-      toPowerOn = i;
+      toPowerOn = i - 1;
     }
-    x-=0.05;
+    x += 0.05;
+  }
+  //Falling
+  for (int i = 0; i <= 4; i++)
+  {
+    if (toPowerOn == i && tempOil < tempOilSetpoint * x - hysteresis)
+    {
+      toPowerOn = i + 1;
+    }
+    x -= 0.05;
   }
 
   lcd.setCursor(0, 4);
@@ -40,5 +49,5 @@ void Control()//PRINT:PowerOn (0-5)
     digitalWrite(PumpOutput, HIGH);//Pump ON
   else if (pump == "MAN" || tempWater >= tempWaterSetpoint )
     digitalWrite(PumpOutput, LOW);//Pump OFF
-  
+
 }

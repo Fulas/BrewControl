@@ -17,6 +17,7 @@ float tempOil;
 float tempWaterSetpoint = 70;
 float tempOilSetpoint = 100;
 
+int toPowerOn = 5;
 String pump = "MAN";
 
 //lcd is a 20 chars and 4 line display
