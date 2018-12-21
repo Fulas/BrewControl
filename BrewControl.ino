@@ -47,14 +47,14 @@ void setup()
            //12.45ºC  100.12ºC
            //68.50ºC  90.50ºC
            //2 + + + + + BOM AUT
-   lcd.setCursor(14, 4);
-   lcd.print("BOM");
+  lcd.setCursor(14, 4);
+  lcd.print("BOM");
 }
 
 void loop()
 {
   sumWater += analogRead(TempWaterInput);
-  sumOil += analogRead(TempWaterInput);
+  sumOil += analogRead(TempOilInput);
   counter++;
 
   if (millis() - start > 1000UL) { // 1000 milisegundos = 1seg
@@ -64,6 +64,16 @@ void loop()
     sumOil = 0;
     counter = 0;
     start = millis();
+    Serial.print(tempWater, 2);
+    Serial.print("\t");
+    Serial.print(tempOil, 2);
+    Serial.print("\n");
+    Serial.print(tempWaterSetpoint, 2);
+    Serial.print("\t");
+    Serial.print(tempOilSetpoint, 2);
+    Serial.print("\n");
+    Serial.print(pump);
+    Serial.print("\n");
   }
   Menu();
 }
