@@ -3,7 +3,7 @@ void Control()//PRINT:PowerOn (0-5)
   int toPowerOn = 0;
   int powerOn = 0;
   int hysteresis = 2;
-  int x = 1;
+  float x = 1;
 
   //OIL
   for (int i = 1; i <= 5 ; i++)
