@@ -16,7 +16,7 @@ void Temp()//PRINT: tempWatter tempOil
     tempWater = map(tempWater, 410, 1023, 0, 614);
     tempWater = (150 * tempWater) / 614;
     lcd.print(tempWater, 2);
-    lcd.print("ºC ");
+    lcd.print(" C ");
   }
 
   //Temp Oil
@@ -32,6 +32,6 @@ void Temp()//PRINT: tempWatter tempOil
     tempOil = map(tempOil, 205, 1023, 0, 614);
     tempOil = (600 * tempOil) / 614;
     lcd.print(tempOil, 2);
-    lcd.print("ºC ");
+    lcd.print(" C ");
   }
 }

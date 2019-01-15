@@ -24,9 +24,9 @@ void Control()//PRINT:PowerOn (0-5)
     x -= 0.05;
   }
 
-  lcd.setCursor(0, 4);
+  lcd.setCursor(0, 3);
   lcd.print(toPowerOn);
-  lcd.setCursor(3, 4);
+  lcd.setCursor(2, 3);
 
   for (int i = 2; i <= 6 ; i++)//Auto1-Auto5
   {

@@ -51,13 +51,13 @@ void Menu()//PRINT: tempWaterSetpoint tempOilSetpoint
       }
     }
   }
-  lcd.setCursor(0, 3);
+  lcd.setCursor(0, 2);
   lcd.print(tempWaterSetpoint, 2);
-  lcd.print("ºC ");
-  lcd.setCursor(10, 3);
+  lcd.print(" C ");
+  lcd.setCursor(10, 2);
   lcd.print(tempOilSetpoint, 2);
-  lcd.print("ºC ");
-  lcd.setCursor(18, 4);
+  lcd.print(" C ");
+  lcd.setCursor(16, 3);
   lcd.print(pump);
 }
 
