@@ -45,8 +45,8 @@ void Menu()//PRINT: tempWaterSetpoint tempOilSetpoint
         case 4: //Ok
           if (pump == "MAN")
             pump = "AUT";
-          else if (option == "AUT")
-            option = "MAN";
+          else if (pump == "AUT")
+            pump = "MAN";
           break;
       }
     }

@@ -34,7 +34,6 @@ void Control()//PRINT:PowerOn (0-5)
     {
       digitalWrite(i + 5, HIGH);//Res ON
       powerOn++;
-      lcd.print(i - 1);
       lcd.print("+ ");
     }
     else
